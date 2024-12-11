@@ -1,4 +1,4 @@
-import lib
+from src import lib
 import pytest
 
 class TestFibonacci:
