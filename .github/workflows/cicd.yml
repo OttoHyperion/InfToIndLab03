@@ -1,5 +1,4 @@
-name: Python CI
-
+name: Test CI CD
 on:
   push:
     branches: [main]
