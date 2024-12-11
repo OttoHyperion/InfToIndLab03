@@ -3,53 +3,36 @@ import pytest
 import my_lib
 
 
-# Тесты для функции чисел Фибоначчи
 class TestFibonacci:
 
-    def test_fibonacci_correct(self):
-        assert my_lib.fibonacci(5) == [0, 1, 1, 2, 3]
+    # Позитивный тест с корректными данными. Возвращает последовательность Фибоначчи
+    def test_positive_fibonacci(self):
+        assert my_lib.fibonacci(5).tolist() == [0, 1, 1, 2, 3]
 
-    def test_fibonacci_zero(self):
+    # Негативный тест с n <= 0. Если мы подаем на вход n <= 0, то программа с последовательностью Фибоначчи выдает ошибку
+    # Вызывается исключение ValueError
+    def test_negative_fibonacci(self):
         with pytest.raises(ValueError):
             my_lib.fibonacci(0)
 
-    def test_fibonacci_negative(self):
-        with pytest.raises(ValueError):
-            my_lib.fibonacci(-5)
-
-
-# Тесты для функции сортировки пузырьком
 class TestBubbleSort:
 
-    def test_bubble_sort_correct(self):
-        assert my_lib.bubble_sort([3, 2, 1]) == [1, 2, 3]
+    # Позитивный тест с корректными данными. Возвращает отсортированный массив
+    def test_positive_bubble_sort(self):
+        assert my_lib.bubble_sort([1, 9, 5, 3]) == [1, 3, 5, 9]
 
-    def test_bubble_sort_empty(self):
-        assert my_lib.bubble_sort([]) == []
-
-    def test_bubble_sort_already_sorted(self):
-        assert my_lib.bubble_sort([1, 2, 3]) == [1, 2, 3]
-
-
-# Тесты для функции калькулятора
-class TestCalculator:
-
-    def test_addition(self):
-        assert my_lib.calculator(3, 2, '+') == 5
-
-    def test_subtraction(self):
-        assert my_lib.calculator(5, 3, '-') == 2
-
-    def test_multiplication(self):
-        assert my_lib.calculator(4, 2, '*') == 8
-
-    def test_division(self):
-        assert my_lib.calculator(6, 3, '/') == 2
-
-    def test_division_by_zero(self):
-        with pytest.raises(ZeroDivisionError):
-            my_lib.calculator(4, 0, '/')
-
-    def test_invalid_operation(self):
+    # Негативный тест с пустым массивом. Вызывается исключение ValueErrorм
+    def test_negative_bubble_sort(self):
         with pytest.raises(ValueError):
-            my_lib.calculator(4, 2, '%')
+            my_lib.bubble_sort([])
+
+class TestEratosthenes:
+    # Позитивный тест с корректными данными. Возвращает последовательность простых чисел до 20
+    def test_positive_eratosthenes(self):
+        assert my_lib.eratosthenes(20) == [2, 3, 5, 7, 11, 13, 17, 19]
+
+    # Негативный тест с n <= 0. Если мы подаем на вход n <= 0, то программа с Решетом Эратосфена выдает ошибку
+    # Вызывается исключение ValueError
+    def test_negative_eratosthenes(self):
+        with pytest.raises(ValueError):
+            my_lib.eratosthenes(-1)

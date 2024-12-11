@@ -1,38 +1,53 @@
 # my_lib.py
 
-# Функция для генерации n чисел Фибоначчи
+import numpy as np
+
+# Функция определения чисел Фибоначчи
+# Принимает n чисел
+# Возвращает список последовательности Фибоначчи = n
+# Пример: n = 7 => [0 1 1 2 3 5 8]
 def fibonacci(n):
-    """Возвращает список из n чисел Фибоначчи"""
     if n <= 0:
-        raise ValueError("Число n должно быть больше нуля.")
-    fib_sequence = [0, 1]
+        raise ValueError("need n > 0")
+    fib_arr = np.zeros(n)
+    fib_arr[1] = 1
     for i in range(2, n):
-        fib_sequence.append(fib_sequence[-1] + fib_sequence[-2])
-    return fib_sequence[:n]
+        fib_arr[i] = fib_arr[i - 2] + fib_arr[i - 1]
+    return fib_arr
 
-# Функция сортировки пузырьком
-def bubble_sort(arr):
-    """Возвращает отсортированный список методом пузырька"""
-    sorted_arr = arr[:]
-    n = len(sorted_arr)
-    for i in range(n):
-        for j in range(0, n-i-1):
-            if sorted_arr[j] > sorted_arr[j+1]:
-                sorted_arr[j], sorted_arr[j+1] = sorted_arr[j+1], sorted_arr[j]
-    return sorted_arr
+# Функция сортировки массива Пузырьком
+# Принимает массив чисел
+# Возвращает отсортированный массив
+# Пример: [4 2 3 1] => [1 2 3 4]
+def bubble_sort(array):
+    if len(array) <= 0:
+        raise ValueError("Null array")
+    if len(array) <= 0:
+        raise
+    for i in range(len(array)):
+        for j in range(len(array)):
+            if array[i] < array[j]:
+                temp = array[i]
+                array[i] = array[j]
+                array[j] = temp
+    return array
 
-# Калькулятор
-def calculator(a, b, operation):
-    """Выполняет арифметическое действие и возвращает результат"""
-    if operation == '+':
-        return a + b
-    elif operation == '-':
-        return a - b
-    elif operation == '*':
-        return a * b
-    elif operation == '/':
-        if b == 0:
-            raise ZeroDivisionError("Деление на ноль невозможно.")
-        return a / b
-    else:
-        raise ValueError("Неверный знак операции.")
+# Решето Эратосфена
+# Принимает число до которого будет находить простые числа
+# Возвращает список простых чисел
+# Пример: 3 => [2 3 5]
+def eratosthenes(n):
+    if n <= 0:
+        raise ValueError("need n > 0")
+    primes = [True] * (n + 1)
+    p = 2
+    while p * p <= n:
+        if primes[p]:
+            for i in range(p * p, n + 1, p):
+                primes[i] = False
+        p += 1
+
+    prime_numbers = [p for p in range(2, n + 1) if primes[p]]
+    return prime_numbers
+
+
