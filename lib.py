@@ -1,4 +1,4 @@
-# my_lib.py
+# lib.py
 
 import numpy as np
 
