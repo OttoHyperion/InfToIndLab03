@@ -3,7 +3,7 @@ import pytest
 
 class TestFibonacci:
 
-    # Позитивный тест с корректными данными. Возвращает последовательность Фибоначчи
+    # Позитивный тест с корректными данными. Возвращает  последовательность Фибоначчи
     def test_positive_fibonacci(self):
         assert lib.fibonacci(5).tolist() == [0, 1, 1, 2, 3]
 
