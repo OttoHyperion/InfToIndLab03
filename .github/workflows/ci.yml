@@ -39,3 +39,14 @@ jobs:
       with:
         name: test-report
         path: report.html
+        
+    - name: Create ZIP archive
+      run: |
+          zip -r code_with_report.zip . -x "*.git*" "*.github*"
+
+      # 5. Загрузка ZIP-файла как артефакта
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: code_with_report
+        path: code_with_report.zip
